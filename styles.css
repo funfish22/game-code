@@ -1,19 +1,22 @@
 :root {
-  color-scheme: light;
-  --ink: #17211c;
-  --muted: #53615a;
-  --paper: #f6f2e8;
-  --paper-strong: #fffaf0;
-  --jade: #2f7569;
-  --jade-deep: #174f48;
-  --copper: #a35c42;
-  --gold: #c39955;
-  --line: rgba(42, 59, 51, 0.2);
-  --glass-fallback: rgba(255, 250, 240, 0.92);
-  --glass-tint: rgba(255, 255, 255, 0.26);
-  --glass-edge: rgba(255, 255, 255, 0.58);
-  --shadow: 0 22px 60px rgba(24, 31, 26, 0.18);
-  --inner-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  color-scheme: dark;
+  --ink: #f5fbff;
+  --muted: #a9bed0;
+  --faint: #7891a6;
+  --paper: #05111f;
+  --paper-strong: #0a2036;
+  --jade: #67e7d2;
+  --jade-deep: #a4fff0;
+  --copper: #8b75ff;
+  --gold: #58d8ff;
+  --danger: #ff8f9d;
+  --danger-deep: #5a1f2b;
+  --line: rgba(219, 248, 255, 0.11);
+  --glass-fallback: rgba(12, 31, 50, 0.96);
+  --glass-tint: rgba(220, 255, 250, 0.055);
+  --glass-edge: rgba(210, 247, 255, 0.18);
+  --shadow: 0 28px 80px rgba(0, 8, 18, 0.46);
+  --inner-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
   --radius-panel: 24px;
   --radius-card: 8px;
   --gap: clamp(14px, 2vw, 22px);
@@ -33,7 +36,10 @@ body {
   color: var(--ink);
   font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
   background:
-    linear-gradient(180deg, rgba(246, 242, 232, 0.76), rgba(236, 230, 215, 0.88)),
+    radial-gradient(circle at 15% 15%, rgba(41, 126, 164, 0.28), transparent 30rem),
+    radial-gradient(circle at 88% 82%, rgba(24, 150, 127, 0.2), transparent 28rem),
+    radial-gradient(circle at 21% 42%, rgba(139, 117, 255, 0.16), transparent 18rem),
+    linear-gradient(145deg, rgba(5, 17, 31, 0.9), rgba(10, 32, 54, 0.86) 55%, rgba(6, 21, 34, 0.92)),
     url("assets/yanyun-bg.svg") center top / cover fixed,
     var(--paper);
 }
@@ -123,7 +129,7 @@ h2 {
   justify-content: center;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 250, 240, 0.76);
+  background: rgba(4, 25, 36, 0.34);
   padding: 8px 14px;
   font-size: 0.9rem;
   font-weight: 700;
@@ -132,13 +138,13 @@ h2 {
 }
 
 .source-pill.is-ready {
-  color: var(--jade-deep);
-  border-color: rgba(47, 117, 105, 0.28);
+  color: #dffcf7;
+  border-color: rgba(177, 250, 238, 0.18);
 }
 
 .source-pill.is-error {
-  color: #7d2e24;
-  border-color: rgba(163, 92, 66, 0.36);
+  color: #ffd4da;
+  border-color: rgba(255, 143, 157, 0.24);
 }
 
 .stats-grid {
@@ -151,7 +157,7 @@ h2 {
 .stat-card {
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  background: rgba(255, 250, 240, 0.78);
+  background: rgba(231, 250, 255, 0.07);
   padding: clamp(14px, 2vw, 18px);
   box-shadow: var(--inner-shadow);
 }
@@ -189,20 +195,22 @@ h2 {
 }
 
 .glass-filter {
-  background: rgba(255, 250, 240, 0.7);
+  background: rgba(12, 31, 50, 0.72);
 }
 
 .glass-overlay {
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.18) 46%, rgba(195, 153, 85, 0.08)),
+    linear-gradient(155deg, rgba(218, 249, 255, 0.09), rgba(25, 80, 109, 0.02) 42%, rgba(4, 24, 39, 0.15)),
     var(--glass-tint);
 }
 
 .glass-specular {
   border-radius: inherit;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    inset 0 -1px 0 rgba(47, 117, 105, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 1.8px 3px 0 -2px rgba(255, 255, 255, 0.5),
+    inset -2px -2px 0 -2px rgba(255, 255, 255, 0.32),
+    inset -0.5px -1px 5px rgba(0, 0, 0, 0.16);
 }
 
 .glass-content {
@@ -213,17 +221,17 @@ h2 {
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass-filter {
-    background: rgba(255, 255, 255, 0.12);
-    -webkit-backdrop-filter: blur(22px) saturate(142%);
-    backdrop-filter: blur(22px) saturate(142%);
+    background: rgba(13, 38, 61, 0.32);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
   }
 
   .source-pill,
   .storage-pill,
   .stat-card {
-    background: rgba(255, 250, 240, 0.6);
-    -webkit-backdrop-filter: blur(14px) saturate(132%);
-    backdrop-filter: blur(14px) saturate(132%);
+    background: rgba(13, 38, 61, 0.62);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    backdrop-filter: blur(14px) saturate(150%);
   }
 }
 
@@ -251,7 +259,7 @@ h2 {
 }
 
 .notice.is-error {
-  color: #7d2e24;
+  color: #ffc1c9;
 }
 
 .code-groups {
@@ -271,9 +279,9 @@ h2 {
   align-items: center;
   gap: 10px;
   margin: 0;
-  border: 1px solid rgba(47, 117, 105, 0.24);
+  border: 1px solid rgba(218, 249, 255, 0.16);
   border-radius: 999px;
-  background: rgba(247, 244, 232, 0.86);
+  background: rgba(7, 27, 43, 0.88);
   padding: 8px 14px;
   color: var(--jade-deep);
   font-size: 0.95rem;
@@ -285,7 +293,8 @@ h2 {
   width: 9px;
   height: 9px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--jade), var(--gold));
+  background: linear-gradient(135deg, var(--gold), var(--jade));
+  box-shadow: 0 0 12px rgba(103, 231, 210, 0.75);
   content: "";
   flex: 0 0 auto;
 }
@@ -310,16 +319,16 @@ h2 {
   align-items: center;
   gap: 10px;
   min-height: 64px;
-  border: 1px solid rgba(42, 59, 51, 0.14);
+  border: 1px solid rgba(218, 249, 255, 0.08);
   border-radius: var(--radius-card);
-  background: rgba(255, 250, 240, 0.72);
+  background: rgba(231, 250, 255, 0.055);
   padding: 9px;
   transition: border-color 180ms ease, background 180ms ease, opacity 180ms ease;
 }
 
 .code-row.is-claimed {
-  border-color: rgba(47, 117, 105, 0.26);
-  background: rgba(230, 241, 234, 0.74);
+  border-color: rgba(103, 231, 210, 0.24);
+  background: rgba(103, 231, 210, 0.09);
 }
 
 .claim-toggle {
@@ -347,9 +356,9 @@ h2 {
   width: 24px;
   height: 24px;
   place-items: center;
-  border: 2px solid rgba(47, 117, 105, 0.45);
+  border: 2px solid rgba(218, 249, 255, 0.32);
   border-radius: 7px;
-  background: rgba(255, 255, 255, 0.56);
+  background: rgba(2, 17, 29, 0.46);
   color: transparent;
   transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
@@ -357,12 +366,12 @@ h2 {
 .claim-input:checked + .checkmark {
   border-color: var(--jade);
   background: var(--jade);
-  color: #fffaf0;
+  color: #073a3c;
 }
 
 .claim-input:focus-visible + .checkmark,
 .copy-button:focus-visible {
-  outline: 3px solid rgba(163, 92, 66, 0.82);
+  outline: 3px solid #d8fff7;
   outline-offset: 3px;
 }
 
@@ -370,7 +379,7 @@ h2 {
   display: block;
   min-width: 0;
   border-radius: var(--radius-card);
-  color: #111a16;
+  color: #e5f0f7;
   font-family: "Cascadia Mono", Consolas, monospace;
   font-size: clamp(0.9rem, 2vw, 1rem);
   line-height: 1.45;
@@ -378,10 +387,10 @@ h2 {
 }
 
 .code-row.is-claimed .code-value {
-  color: rgba(23, 33, 28, 0.62);
+  color: var(--faint);
   text-decoration: line-through;
   text-decoration-thickness: 2px;
-  text-decoration-color: rgba(47, 117, 105, 0.54);
+  text-decoration-color: rgba(103, 231, 210, 0.5);
 }
 
 .copy-button {
@@ -389,10 +398,10 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid rgba(47, 117, 105, 0.28);
+  border: 1px solid rgba(214, 255, 248, 0.38);
   border-radius: var(--radius-card);
-  background: rgba(47, 117, 105, 0.12);
-  color: var(--jade-deep);
+  background: linear-gradient(135deg, #c5fff5, #67e7d2);
+  color: #062d32;
   padding: 0 12px;
   font-weight: 900;
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
@@ -404,8 +413,8 @@ h2 {
 }
 
 .copy-button:hover {
-  border-color: rgba(47, 117, 105, 0.46);
-  background: rgba(47, 117, 105, 0.18);
+  border-color: rgba(214, 255, 248, 0.6);
+  background: linear-gradient(135deg, #d8fff7, #75f1dd);
 }
 
 .copy-button:active {
@@ -413,16 +422,16 @@ h2 {
 }
 
 .copy-button.is-copied {
-  border-color: rgba(195, 153, 85, 0.58);
-  background: rgba(195, 153, 85, 0.18);
-  color: #68471d;
+  border-color: rgba(88, 216, 255, 0.58);
+  background: linear-gradient(135deg, rgba(88, 216, 255, 0.34), rgba(103, 231, 210, 0.26));
+  color: #f5fbff;
 }
 
 .empty-state {
   margin: 0;
-  border: 1px dashed rgba(83, 97, 90, 0.38);
+  border: 1px dashed rgba(219, 248, 255, 0.22);
   border-radius: var(--radius-card);
-  background: rgba(255, 250, 240, 0.66);
+  background: rgba(231, 250, 255, 0.055);
   padding: 22px;
   color: var(--muted);
   font-weight: 700;
