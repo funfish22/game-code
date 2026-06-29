@@ -1,0 +1,4 @@
+interface:
+  display_name: "液態玻璃靜態網頁"
+  short_description: "建立具參數化折射、分層高光與流動選取效果的靜態網頁"
+  default_prompt: "使用 $liquid-glass-static-web，以繁體中文規範設計或改造這個純靜態 HTML 頁面，加入節制的液態玻璃功能層、archisvaze 式小型折射、分組工具列與完整降級處理。"

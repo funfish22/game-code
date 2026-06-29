@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>燕雲十六聲序號紀錄</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="title-block">
+          <p class="eyebrow">本機紀錄</p>
+          <h1>燕雲十六聲序號紀錄</h1>
+          <p class="lead">依日期檢視序號，複製與領取狀態會保存在這台裝置。</p>
+        </div>
+        <p class="source-pill" id="sourceStatus">讀取 codes.json</p>
+      </header>
+
+      <section class="stats-grid" aria-label="序號統計">
+        <article class="stat-card">
+          <span class="stat-label">總序號</span>
+          <strong class="stat-value" id="totalCodes">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">已領取</span>
+          <strong class="stat-value" id="claimedCodes">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">未領取</span>
+          <strong class="stat-value" id="remainingCodes">0</strong>
+        </article>
+      </section>
+
+      <main class="glass-shell app-panel" aria-labelledby="listTitle">
+        <div class="glass-filter" aria-hidden="true"></div>
+        <div class="glass-overlay" aria-hidden="true"></div>
+        <div class="glass-specular" aria-hidden="true"></div>
+        <div class="glass-content">
+          <div class="panel-heading">
+            <div>
+              <h2 id="listTitle">序號清單</h2>
+              <p id="dateSummary">等待資料載入</p>
+            </div>
+            <span class="storage-pill">LocalStorage</span>
+          </div>
+
+          <div class="notice" id="notice" role="status" aria-live="polite"></div>
+          <div class="code-groups" id="codeGroups" aria-live="polite"></div>
+
+          <noscript>
+            <p class="empty-state">此頁面需要啟用 JavaScript 才能讀取序號與保存領取狀態。</p>
+          </noscript>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

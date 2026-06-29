@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>液態玻璃靜態頁面</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <main class="page-shell">
+    <div class="glass-layer glass-filter" aria-hidden="true"></div>
+    <div class="glass-layer glass-overlay" aria-hidden="true"></div>
+    <div class="glass-layer glass-specular" aria-hidden="true"></div>
+
+    <div class="glass-content">
+      <header class="hero">
+        <p class="eyebrow">純靜態 HTML 範本</p>
+        <h1>讓功能浮在內容之上。</h1>
+        <p class="intro">替換成實際內容，並保留節制的玻璃層級、清楚對比與完整降級。</p>
+      </header>
+
+      <section class="content-panel" aria-labelledby="section-title">
+        <div>
+          <p class="eyebrow">下一步</p>
+          <h2 id="section-title">依真實內容塑造頁面。</h2>
+        </div>
+        <button class="primary-button" type="button">繼續</button>
+      </section>
+    </div>
+
+    <nav class="liquid-toolbar" aria-label="檢視選項">
+      <span class="liquid-indicator" aria-hidden="true"></span>
+      <div class="toolbar-group">
+        <button class="toolbar-button is-active" type="button" aria-selected="true">總覽</button>
+        <button class="toolbar-button" type="button" aria-selected="false">詳細資料</button>
+      </div>
+      <div class="toolbar-group">
+        <button class="toolbar-button icon-button" type="button" aria-label="更多選項">•••</button>
+      </div>
+    </nav>
+  </main>
+
+  <svg class="filter-defs" aria-hidden="true" focusable="false" color-interpolation-filters="sRGB">
+    <defs id="liquid-filter-defs"></defs>
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+</html>
