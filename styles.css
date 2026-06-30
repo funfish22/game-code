@@ -116,6 +116,7 @@ h2 {
 
 .source-pill,
 .storage-pill,
+.date-tab,
 .date-tag,
 .copy-button,
 .claim-toggle {
@@ -228,6 +229,7 @@ h2 {
 
   .source-pill,
   .storage-pill,
+  .date-tab,
   .stat-card {
     background: rgba(13, 38, 61, 0.62);
     -webkit-backdrop-filter: blur(14px) saturate(150%);
@@ -245,6 +247,64 @@ h2 {
 
 #dateSummary {
   line-height: 1.5;
+}
+
+.date-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.date-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(218, 249, 255, 0.15);
+  border-radius: 999px;
+  background: rgba(7, 27, 43, 0.66);
+  color: var(--muted);
+  padding: 8px 14px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.25;
+  box-shadow: var(--inner-shadow);
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  white-space: nowrap;
+}
+
+.date-tab::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), var(--jade));
+  box-shadow: 0 0 12px rgba(103, 231, 210, 0.48);
+  content: "";
+  flex: 0 0 auto;
+}
+
+.date-tab:hover {
+  border-color: rgba(218, 249, 255, 0.3);
+  color: #e5f0f7;
+}
+
+.date-tab:active {
+  transform: translateY(1px);
+}
+
+.date-tab[aria-pressed="true"] {
+  border-color: rgba(214, 255, 248, 0.5);
+  background: linear-gradient(135deg, #d8fff7, #67e7d2);
+  color: #062d32;
+}
+
+.date-tab[aria-pressed="true"]::before {
+  background: #062d32;
+  box-shadow: none;
+}
+
+.date-tab[aria-pressed="true"] .date-count {
+  color: rgba(6, 45, 50, 0.74);
 }
 
 .notice {
@@ -370,6 +430,7 @@ h2 {
 }
 
 .claim-input:focus-visible + .checkmark,
+.date-tab:focus-visible,
 .copy-button:focus-visible {
   outline: 3px solid #d8fff7;
   outline-offset: 3px;
@@ -511,6 +572,7 @@ h2 {
   .source-pill,
   .storage-pill,
   .stat-card,
+  .date-tab,
   .date-tag,
   .code-row,
   .copy-button,

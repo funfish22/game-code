@@ -3,6 +3,7 @@ const STORAGE_KEY = "yanyun-code-claims:v1";
 
 const state = {
   groups: [],
+  activeDate: "",
   claimed: readClaimedState(),
 };
 
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   els.claimedCodes = document.getElementById("claimedCodes");
   els.remainingCodes = document.getElementById("remainingCodes");
   els.dateSummary = document.getElementById("dateSummary");
+  els.dateTabs = document.getElementById("dateTabs");
   els.notice = document.getElementById("notice");
   els.codeGroups = document.getElementById("codeGroups");
 
@@ -31,11 +33,15 @@ async function loadCodes() {
 
     const payload = await response.json();
     state.groups = normalizeCodeData(payload);
+    state.activeDate = getInitialActiveDate(state.groups, state.activeDate);
+    renderDateTabs();
     renderCodeGroups();
     updateSourceStatus("已載入 codes.json", "is-ready");
     setNotice("");
   } catch (error) {
     state.groups = [];
+    state.activeDate = "";
+    renderDateTabs();
     renderCodeGroups();
     updateSourceStatus("讀取失敗", "is-error");
     setNotice("無法讀取 codes.json，請確認正在使用本機伺服器開啟此頁面。", "is-error");
@@ -120,6 +126,62 @@ function formatDate(dateText) {
   }).format(new Date(time));
 }
 
+function getInitialActiveDate(groups, currentDate) {
+  if (currentDate && groups.some((group) => group.date === currentDate)) {
+    return currentDate;
+  }
+
+  return groups[0]?.date ?? "";
+}
+
+function getActiveGroup() {
+  return state.groups.find((group) => group.date === state.activeDate) ?? state.groups[0] ?? null;
+}
+
+function selectDate(date) {
+  if (state.activeDate === date) {
+    return;
+  }
+
+  state.activeDate = date;
+  renderDateTabs();
+  renderCodeGroups();
+}
+
+function renderDateTabs() {
+  els.dateTabs.replaceChildren();
+
+  if (state.groups.length === 0) {
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  for (const group of state.groups) {
+    const button = document.createElement("button");
+    const isActive = group.date === state.activeDate;
+    button.className = "date-tab";
+    button.type = "button";
+    button.dataset.date = group.date;
+    button.setAttribute("aria-pressed", String(isActive));
+
+    const date = document.createElement("time");
+    date.dateTime = group.date;
+    date.textContent = group.label;
+
+    const count = document.createElement("span");
+    count.className = "date-count";
+    count.dataset.dateCount = group.date;
+    count.textContent = getDateCountText(group);
+
+    button.append(date, count);
+    button.addEventListener("click", () => selectDate(group.date));
+    fragment.append(button);
+  }
+
+  els.dateTabs.append(fragment);
+}
+
 function renderCodeGroups() {
   els.codeGroups.replaceChildren();
 
@@ -133,8 +195,9 @@ function renderCodeGroups() {
   }
 
   const fragment = document.createDocumentFragment();
+  const group = getActiveGroup();
 
-  for (const group of state.groups) {
+  if (group) {
     fragment.append(createDateSection(group));
   }
 
@@ -225,28 +288,28 @@ function getDateCountText(group) {
 }
 
 function updateDateCount(group) {
-  const count = Array.from(els.codeGroups.querySelectorAll("[data-date-count]")).find(
-    (item) => item.dataset.dateCount === group.date,
-  );
-  if (count) {
+  const counts = document.querySelectorAll("[data-date-count]");
+
+  for (const count of counts) {
+    if (count.dataset.dateCount !== group.date) {
+      continue;
+    }
+
     count.textContent = getDateCountText(group);
   }
 }
 
 function updateStats() {
-  const total = state.groups.reduce((sum, group) => sum + group.codes.length, 0);
-  const claimed = state.groups.reduce(
-    (sum, group) => sum + group.codes.filter((item) => state.claimed[item.key]).length,
-    0,
-  );
+  const group = getActiveGroup();
+  const total = group?.codes.length ?? 0;
+  const claimed = group?.codes.filter((item) => state.claimed[item.key]).length ?? 0;
   const remaining = Math.max(total - claimed, 0);
 
   els.totalCodes.textContent = String(total);
   els.claimedCodes.textContent = String(claimed);
   els.remainingCodes.textContent = String(remaining);
 
-  const dateCount = state.groups.length;
-  els.dateSummary.textContent = dateCount > 0 ? `${dateCount} 個日期分組` : "沒有日期分組";
+  els.dateSummary.textContent = group ? `${group.label}，${getDateCountText(group)}` : "沒有日期分組";
 }
 
 function setClaimed(key, isClaimed) {
